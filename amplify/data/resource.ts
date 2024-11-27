@@ -11,29 +11,18 @@ const schema = a.schema({
     .model({
       content: a.string(),
     }),
-  PostTag: a.model({
-    // 1. Create reference fields to both ends of
-    //    the many-to-many relationship
-    postId: a.id().required(),
-    tagId: a.id().required(),
-    // 2. Create relationship fields to both ends of
-    //    the many-to-many relationship using their
-    //    respective reference fields
-    post: a.belongsTo('Post', 'postId'),
-    tag: a.belongsTo('Tag', 'tagId'),
-  }),
   Post: a.model({
-    title: a.string(),
-    content: a.string(),
-    // 3. Add relationship field to the join model
-    //    with the reference of `postId`
-    tags: a.hasMany('PostTag', 'postId'),
+    title: a.string().required(),
+    content: a.string().required(),
+    authorId: a.id(),
+    author: a.belongsTo('Person', 'authorId'),
+    editorId: a.id(),
+    editor: a.belongsTo('Person', 'editorId'),
   }),
-  Tag: a.model({
+  Person: a.model({
     name: a.string(),
-    // 4. Add relationship field to the join model
-    //    with the reference of `tagId`
-    posts: a.hasMany('PostTag', 'tagId'),
+    editedPosts: a.hasMany('Post', 'editorId'),
+    authoredPosts: a.hasMany('Post', 'authorId'),
   }),
 }).authorization((allow) => allow.publicApiKey());
 
