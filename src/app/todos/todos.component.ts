@@ -20,7 +20,7 @@ export class TodosComponent implements OnInit {
     this.testMtM()
   }
 
-  testMtM(){
+  async testMtM(){
     const { data: post } = await client.models.Post.get(
         { id: "a5aaf808-2ff4-43da-b877-3273a1c71dce" },
         { selectionSet: ['id', 'tags.*'] },
