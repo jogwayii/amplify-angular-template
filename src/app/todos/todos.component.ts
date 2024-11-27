@@ -17,6 +17,7 @@ export class TodosComponent implements OnInit {
 
   ngOnInit(): void {
     this.listTodos();
+    this.testMtM()
   }
 
   testMtM(){
@@ -24,7 +25,7 @@ export class TodosComponent implements OnInit {
         { id: "a5aaf808-2ff4-43da-b877-3273a1c71dce" },
         { selectionSet: ['id', 'tags.*'] },
       );
-    console.log(post.tag)
+    console.log(post.tags)
   }
 
   listTodos() {
