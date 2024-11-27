@@ -19,6 +19,14 @@ export class TodosComponent implements OnInit {
     this.listTodos();
   }
 
+  testMtM(){
+    const { data: post } = await client.models.Post.get(
+        { id: "a5aaf808-2ff4-43da-b877-3273a1c71dce" },
+        { selectionSet: ['id', 'tags.*'] },
+      );
+    console.log(post.tag)
+  }
+
   listTodos() {
     try {
       client.models.Todo.observeQuery().subscribe({
