@@ -22,7 +22,6 @@ export class TodosComponent implements OnInit {
 
   async testMtM(){
     const { data: post } = await client.models.Post.list(
-        { id: "a5aaf808-2ff4-43da-b877-3273a1c71dce" },
         { selectionSet: ['id','title','content', 'author.*', 'editor.*'] },
       );
     console.log(post)
