@@ -11,6 +11,24 @@ const schema = a.schema({
     .model({
       content: a.string(),
     }),
+  
+  Tag: a.model({
+    name: a.string(),
+    // 4. Add relationship field to the join model
+    //    with the reference of `tagId`
+    posts: a.hasMany('PostTag', 'tagId'),
+  }),
+  PostTag: a.model({
+    // 1. Create reference fields to both ends of
+    //    the many-to-many relationship
+    postId: a.id().required(),
+    tagId: a.id().required(),
+    // 2. Create relationship fields to both ends of
+    //    the many-to-many relationship using their
+    //    respective reference fields
+    post: a.belongsTo('Post', 'postId'),
+    tag: a.belongsTo('Tag', 'tagId'),
+  }),
   Post: a.model({
     title: a.string().required(),
     content: a.string().required(),
