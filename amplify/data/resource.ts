@@ -36,6 +36,7 @@ const schema = a.schema({
     author: a.belongsTo('Person', 'authorId'),
     editorId: a.id(),
     editor: a.belongsTo('Person', 'editorId'),
+    tags: a.hasMany('PostTag', 'postId'),
   }),
   Person: a.model({
     name: a.string(),
